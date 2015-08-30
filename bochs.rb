@@ -17,7 +17,7 @@ class Bochs < Formula
   def install
     system "./configure", "--prefix=#{prefix}",
                           "--with-x11",
-                          "--enable-debugger",
+                          "--enable-gdb-stub",
                           "--enable-disasm",
                           "--disable-docbook",
                           "--enable-x86-64",
