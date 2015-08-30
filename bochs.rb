@@ -13,11 +13,20 @@ class Bochs < Formula
   depends_on "pkg-config" => :build
   depends_on :x11
   depends_on "gtk+"
+  
+  option "with-gdb-stub", "Enable GDB Stub"
+  
+  opts = []
+  if build.with? "gdb-stub"
+    opts << "--enable-gdb-stub"
+  else
+    opts << "--enable-debugger"
+  end
 
   def install
     system "./configure", "--prefix=#{prefix}",
                           "--with-x11",
-                          "--enable-gdb-stub",
+                          *opts,
                           "--enable-disasm",
                           "--disable-docbook",
                           "--enable-x86-64",
