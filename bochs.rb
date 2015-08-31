@@ -15,42 +15,45 @@ class Bochs < Formula
   depends_on "gtk+"
   
   option "with-gdb-stub", "Enable GDB Stub"
-  
-  opts = []
-  if build.with? "gdb-stub"
-    opts << "--enable-gdb-stub"
-  else
-    opts << "--enable-debugger"
-  end
 
   def install
-    system "./configure", "--prefix=#{prefix}",
-                          "--with-x11",
-                          *opts,
-                          "--enable-disasm",
-                          "--disable-docbook",
-                          "--enable-x86-64",
-                          "--enable-pci",
-                          "--enable-all-optimizations",
-                          "--enable-plugins",
-                          "--enable-cdrom",
-                          "--enable-a20-pin",
-                          "--enable-fpu",
-                          "--enable-alignment-check",
-                          "--enable-large-ramfile",
-                          "--enable-debugger-gui",
-                          "--enable-readline",
-                          "--enable-iodebug",
-                          "--enable-xpm",
-                          "--enable-show-ips",
-                          "--enable-logging",
-                          "--enable-usb",
-                          "--enable-ne2000",
-                          "--enable-cpu-level=6",
-                          "--enable-sb16",
-                          "--enable-clgd54xx",
-                          "--with-term",
-                          "--enable-ne2000"
+    
+    args = %W[
+      --prefix=#{prefix}
+      --with-x11
+      --enable-disasm
+      --disable-docbook
+      --enable-x86-64
+      --enable-pci
+      --enable-all-optimizations
+      --enable-plugins
+      --enable-cdrom
+      --enable-a20-pin
+      --enable-fpu
+      --enable-alignment-check
+      --enable-large-ramfile
+      --enable-debugger-gui
+      --enable-readline
+      --enable-iodebug
+      --enable-xpm
+      --enable-show-ips
+      --enable-logging
+      --enable-usb
+      --enable-ne2000
+      --enable-cpu-level=6
+      --enable-sb16
+      --enable-clgd54xx
+      --with-term
+      --enable-ne2000"
+    ]
+    
+    if build.with? "gdb-stub"
+      args << "--enable-gdb-stub"
+    else
+      args << "--enable-debugger"
+    end
+    
+    system "./configure", args
 
     system "make"
     system "make", "install"
