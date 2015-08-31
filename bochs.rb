@@ -44,7 +44,7 @@ class Bochs < Formula
       --enable-sb16
       --enable-clgd54xx
       --with-term
-      --enable-ne2000"
+      --enable-ne2000
     ]
     
     if build.with? "gdb-stub"
