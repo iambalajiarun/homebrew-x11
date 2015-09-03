@@ -54,7 +54,7 @@ class Bochs < Formula
       args << "--enable-debugger"
     end
     
-    system "./configure", args
+    system "./configure", *args
 
     system "make"
     system "make", "install"
