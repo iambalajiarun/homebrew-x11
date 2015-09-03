@@ -21,6 +21,7 @@ class Bochs < Formula
     args = %W[
       --prefix=#{prefix}
       --with-x11
+      --with-nogui
       --enable-disasm
       --disable-docbook
       --enable-x86-64
